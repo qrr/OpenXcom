@@ -20,6 +20,8 @@
 #include "RuleTerrain.h"
 #include "../Mod/Mod.h"
 
+#include <yaml-cpp/yaml.h>
+
 namespace OpenXcom
 {
 

@@ -31,6 +31,8 @@
 #include "../Savegame/MissionStatistics.h"
 #include "../Savegame/BattleUnitStatistics.h"
 
+#include <yaml-cpp/yaml.h>
+
 namespace OpenXcom
 {
 

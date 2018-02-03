@@ -17,10 +17,12 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL.h>
 #include <string>
 #include <vector>
 #include "GraphSubset.h"
+
+#include <SDL_stdinc.h>
+#include <SDL_video.h>   //For SDL_Surface, SDL_Rect
 
 namespace OpenXcom
 {

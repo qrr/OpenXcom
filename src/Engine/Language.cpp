@@ -17,11 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Language.h"
-#include <fstream>
-#include <cassert>
-#include <set>
-#include <climits>
-#include <algorithm>
 #include "CrossPlatform.h"
 #include "Logger.h"
 #include "Options.h"
@@ -29,6 +24,14 @@
 #include "Unicode.h"
 #include "Exception.h"
 #include "../Mod/ExtraStrings.h"
+
+#include <fstream>
+#include <cassert>
+#include <set>
+#include <climits>
+#include <algorithm>
+
+#include <yaml-cpp/yaml.h>
 
 namespace OpenXcom
 {

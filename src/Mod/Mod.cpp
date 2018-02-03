@@ -17,9 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Mod.h"
-#include <algorithm>
-#include <sstream>
-#include <climits>
 #include <cassert>
 #include "../Engine/CrossPlatform.h"
 #include "../Engine/FileMap.h"
@@ -90,7 +87,15 @@
 #include "RuleVideo.h"
 #include "RuleConverter.h"
 
+#include "Unit.hpp"
 #define ARRAYLEN(x) (sizeof(x) / sizeof(x[0]))
+
+
+#include <yaml-cpp/yaml.h>
+
+#include <algorithm>
+#include <sstream>
+#include <climits>
 
 namespace OpenXcom
 {
@@ -204,6 +209,7 @@ Mod::Mod() : _costEngineer(0), _costScientist(0), _timePersonnel(0), _initialFun
 	_muteSound = new Sound();
 	_globe = new RuleGlobe();
 	_converter = new RuleConverter();
+	_startingBase = new YAML::Node();
 	_statAdjustment[0].aimAndArmorMultiplier = 0.5;
 	_statAdjustment[0].growthMultiplier = 0;
 	for (int i = 1; i != 5; ++i)
@@ -222,6 +228,7 @@ Mod::~Mod()
 	delete _muteSound;
 	delete _globe;
 	delete _converter;
+	delete _startingBase;
 	for (std::map<std::string, Font*>::iterator i = _fonts.begin(); i != _fonts.end(); ++i)
 	{
 		delete i->second;
@@ -1318,7 +1325,7 @@ void Mod::loadFile(const std::string &filename)
 	{
 		for (YAML::const_iterator i = base.begin(); i != base.end(); ++i)
 		{
-			_startingBase[i->first.as<std::string>()] = YAML::Node(i->second);
+			(*_startingBase)[i->first.as<std::string>()] = YAML::Node(i->second);
 		}
 	}
 	if (doc["startingTime"])
@@ -1629,7 +1636,7 @@ SavedGame *Mod::newSave() const
 
 	// Set up starting base
 	Base *base = new Base(this);
-	base->load(_startingBase, save, true);
+	base->load(*_startingBase, save, true);
 	save->getBases()->push_back(base);
 
 	// Correct IDs
@@ -1663,7 +1670,7 @@ SavedGame *Mod::newSave() const
 		}
 	}
 
-	const YAML::Node &node = _startingBase["randomSoldiers"];
+	const YAML::Node &node = (*_startingBase)["randomSoldiers"];
 	std::vector<std::string> randomTypes;
 	if (node)
 	{
@@ -2172,7 +2179,7 @@ std::vector<RuleBaseFacility*> Mod::getCustomBaseFacilities() const
 {
 	std::vector<RuleBaseFacility*> placeList;
 
-	for (YAML::const_iterator i = _startingBase["facilities"].begin(); i != _startingBase["facilities"].end(); ++i)
+	for (YAML::const_iterator i = (*_startingBase)["facilities"].begin(); i != (*_startingBase)["facilities"].end(); ++i)
 	{
 		std::string type = (*i)["type"].as<std::string>();
 		RuleBaseFacility *facility = getBaseFacility(type, true);
@@ -2259,7 +2266,7 @@ const std::vector<std::vector<int> > &Mod::getAlienItemLevels() const
  */
 const YAML::Node &Mod::getStartingBase() const
 {
-	return _startingBase;
+	return *_startingBase;
 }
 
 /**

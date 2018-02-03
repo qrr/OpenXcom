@@ -29,6 +29,7 @@
 #include "../Mod/Armor.h"
 #include "SerializationHelper.h"
 #include "../Battlescape/Particle.h"
+#include "../Battlescape/Position.hpp"
 #include "../fmath.h"
 
 namespace OpenXcom

@@ -31,6 +31,10 @@
 #include "../Mod/StatString.h"
 #include "../Engine/Unicode.h"
 
+#include "../Mod/Unit.hpp"
+
+#include <yaml-cpp/yaml.h>
+
 namespace OpenXcom
 {
 

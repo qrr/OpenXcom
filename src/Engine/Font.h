@@ -21,9 +21,18 @@
 #include <vector>
 #include <utility>
 #include <string>
-#include <SDL.h>
-#include <yaml-cpp/yaml.h>
+
+#include <SDL_video.h> //For SDL_Color, SDL_Rect.
+
 #include "Unicode.h"
+/*
+* Instead of pulling in yaml-cpp, just pre-declare the require Node
+* we require in member function definitions.
+*/
+namespace YAML
+{
+class Node;
+}
 
 namespace OpenXcom
 {

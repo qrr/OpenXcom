@@ -19,6 +19,8 @@
  */
 #include "../Engine/State.h"
 #include <string>
+#include <SDL_thread.h> //For SDL_Thread.
+
 #include <sstream>
 
 namespace OpenXcom

@@ -19,8 +19,9 @@
  */
 #include <vector>
 #include <string>
-#include <SDL.h>
+
 #include "../Savegame/Soldier.h"
+#include <SDL_video.h>  // For SDL_color.
 #include "LocalizedText.h"
 
 namespace OpenXcom

@@ -18,9 +18,19 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "../fmath.h"
+
 #include <string>
 #include <vector>
-#include <yaml-cpp/yaml.h>
+#include <map>
+
+/*
+* Instead of pulling in yaml-cpp, just pre-declare the require Node
+* we require in member function definitions.
+*/
+namespace YAML
+{
+class Node;
+}
 
 namespace OpenXcom
 {
@@ -62,43 +72,4 @@ public:
 	std::string getRandomDeployment() const;
 };
 
-}
-
-namespace YAML
-{
-	template<>
-	struct convert < OpenXcom::TerrainCriteria >
-	{
-		static Node encode(const OpenXcom::TerrainCriteria& rhs)
-		{
-			Node node;
-			node["name"] = rhs.name;
-			node["weight"] = rhs.weight;
-			std::vector<double> area;
-			area.push_back(rhs.lonMin);
-			area.push_back(rhs.lonMax);
-			area.push_back(rhs.latMin);
-			area.push_back(rhs.latMax);
-			node["area"] = area;
-			return node;
-		}
-
-		static bool decode(const Node& node, OpenXcom::TerrainCriteria& rhs)
-		{
-			if (!node.IsMap())
-				return false;
-
-			rhs.name = node["name"].as<std::string>(rhs.name);
-			rhs.weight = node["weight"].as<int>(rhs.weight);
-			if (node["area"])
-			{
-				std::vector<double> area = node["area"].as< std::vector<double> >();
-				rhs.lonMin = Deg2Rad(area[0]);
-				rhs.lonMax = Deg2Rad(area[1]);
-				rhs.latMin = Deg2Rad(area[2]);
-				rhs.latMax = Deg2Rad(area[3]);
-			}
-			return true;
-		}
-	};
 }

@@ -18,10 +18,6 @@
  */
 #include "Game.h"
 #include "../resource.h"
-#include <algorithm>
-#include <cmath>
-#include <sstream>
-#include <SDL_mixer.h>
 #include "State.h"
 #include "Screen.h"
 #include "Sound.h"
@@ -40,6 +36,14 @@
 #include "FileMap.h"
 #include "Unicode.h"
 #include "../Menu/TestState.h"
+
+#include <SDL_mixer.h>
+#include <SDL.h>
+#include <yaml-cpp/yaml.h>
+
+#include <algorithm>
+#include <cmath>
+#include <sstream>
 
 namespace OpenXcom
 {

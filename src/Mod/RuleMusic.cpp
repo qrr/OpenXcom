@@ -18,6 +18,9 @@
  */
 
 #include "RuleMusic.h"
+
+#include <yaml-cpp/yaml.h>
+
 #include <climits>
 
 namespace OpenXcom

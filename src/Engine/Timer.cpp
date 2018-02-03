@@ -20,6 +20,8 @@
 #include "Game.h"
 #include "Options.h"
 
+#include <SDL_timer.h> //For SDL_GetTicks().
+
 namespace OpenXcom
 {
 
