@@ -19,6 +19,8 @@
  */
 #include <SDL.h>
 
+#include "MCDPatch.h"
+
 #include <string>
 #include <vector>
 

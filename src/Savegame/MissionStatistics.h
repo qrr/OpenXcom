@@ -62,11 +62,13 @@ struct MissionStatistics
 	/// Save
 	YAML::Node save() const;
 
-	std::string getMissionName(Language *lang) const
+	std::string getMissionName(Language *lang) const;
 
-	std::string getRatingString(Language *lang) const
+	std::string getRatingString(Language *lang) const;
 
 	std::string getLocationString() const;
+
+	bool isDarkness() const;
 
 	std::string getDaylightString() const;
 

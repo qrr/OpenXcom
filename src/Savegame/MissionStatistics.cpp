@@ -18,6 +18,8 @@
 */
 #include "MissionStatistics.h"
 
+#include "../Battlescape/TileEngine.h"
+
 #include <yaml-cpp/yaml.h>
 
 namespace OpenXcom
@@ -69,7 +71,7 @@ namespace OpenXcom
 		return node;
 	}
 
-	std::wstring MissionStatistics::getMissionName(Language *lang) const
+	std::string MissionStatistics::getMissionName(Language *lang) const
 	{
 		if (!markerName.empty())
 		{
@@ -81,9 +83,9 @@ namespace OpenXcom
 		}
 	}
 
-	std::wstring MissionStatistics::getRatingString(Language *lang) const
+	std::string MissionStatistics::getRatingString(Language *lang) const
 	{
-		std::wostringstream ss;
+		std::ostringstream ss;
 		if (success)
 		{
 			ss << lang->getString("STR_VICTORY");
@@ -106,6 +108,11 @@ namespace OpenXcom
 		{
 			return country;
 		}
+	}
+
+	bool MissionStatistics::isDarkness() const
+	{
+		return daylight > TileEngine::MAX_DARKNESS_TO_SEE_UNITS;
 	}
 
 	std::string MissionStatistics::getDaylightString() const
