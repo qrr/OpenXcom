@@ -27,13 +27,11 @@
 #include "../Interface/Text.h"
 #include "../Interface/TextList.h"
 #include "../Interface/ComboBox.h"
-#include "../Savegame/BaseFacility.h"
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/Base.h"
 #include "../Savegame/Soldier.h"
 #include "../Savegame/Craft.h"
 #include "../Savegame/ItemContainer.h"
-#include "../Mod/RuleItem.h"
 #include "../Mod/Armor.h"
 #include "../Mod/RuleCraft.h"
 #include "../Savegame/CraftWeapon.h"
@@ -46,6 +44,7 @@
 #include <climits>
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 
 namespace OpenXcom
 {
@@ -675,7 +674,7 @@ void SellState::updateItemStrings()
 	}
 
 	ss3 << _base->getUsedStores();
-	if (std::abs(_spaceChange) > 0.05)
+	if (std::fabs(_spaceChange) > 0.05)
 	{
 		ss3 << "(";
 		if (_spaceChange > 0.05)
