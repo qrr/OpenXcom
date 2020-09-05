@@ -22,7 +22,6 @@
 
 #include <map>
 #include <string>
-#include <sstream>
 
 /*
 * Instead of pulling in yaml-cpp, just pre-declare the require Node

@@ -163,7 +163,7 @@ void Language::load(const std::string &filename)
 			if (!value.empty())
 			{
 				std::string key = i->first.as<std::string>();
-				_strings[key] = loadString(value);
+				_strings[key] = LocalizedText(loadString(value));
 			}
 		}
 		// Strings with plurality
@@ -175,7 +175,7 @@ void Language::load(const std::string &filename)
 				if (!value.empty())
 				{
 					std::string key = i->first.as<std::string>() + "_" + j->first.as<std::string>();
-					_strings[key] = loadString(value);
+					_strings[key] = LocalizedText(loadString(value));
 				}
 			}
 		}
@@ -232,7 +232,7 @@ void Language::loadRule(const std::map<std::string, ExtraStrings*> &extraStrings
 		ExtraStrings *extras = it->second;
 		for (std::map<std::string, std::string>::const_iterator i = extras->getStrings()->begin(); i != extras->getStrings()->end(); ++i)
 		{
-			_strings[i->first] = loadString(i->second);
+			_strings[i->first] = LocalizedText(loadString(i->second));
 		}
 	}
 }
@@ -279,7 +279,7 @@ LocalizedText Language::getString(const std::string &id) const
 {
 	if (id.empty())
 	{
-		return id;
+		return LocalizedText(id);
 	}
 	std::map<std::string, LocalizedText>::const_iterator s = _strings.find(id);
 	// Check if translation strings recently learned pluralization.
@@ -329,7 +329,7 @@ LocalizedText Language::getString(const std::string &id, unsigned n) const
 			notFoundIds.insert(id);
 			Log(LOG_WARNING) << id << " not found in " << Options::language;
 		}
-		return id;
+		return LocalizedText(id);
 	}
 	if (n == UINT_MAX) // Special case
 	{
@@ -347,7 +347,7 @@ LocalizedText Language::getString(const std::string &id, unsigned n) const
 		ss << n;
 		std::string marker("{N}"), val(ss.str()), txt(s->second);
 		Unicode::replace(txt, marker, val);
-		return txt;
+		return LocalizedText(txt);
 	}
 
 }

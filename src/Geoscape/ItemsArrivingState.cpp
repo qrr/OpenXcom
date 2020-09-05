@@ -17,8 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ItemsArrivingState.h"
-#include <sstream>
-#include <algorithm>
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
@@ -38,6 +37,8 @@
 #include "GeoscapeState.h"
 #include "../Engine/Options.h"
 #include "../Basescape/BasescapeState.h"
+
+#include <sstream>
 
 namespace OpenXcom
 {

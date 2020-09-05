@@ -17,12 +17,14 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include "../Savegame/SoldierGender.h"
+#include "LocalizedText.h"
+
+#include <SDL_video.h>  // For SDL_color.
+
 #include <vector>
 #include <string>
-
-#include "../Savegame/Soldier.h"
-#include <SDL_video.h>  // For SDL_color.
-#include "LocalizedText.h"
 
 namespace OpenXcom
 {

@@ -17,17 +17,19 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SetWindowedRootState.h"
-#include <string>
-#include <sstream>
 #include "../Interface/Window.h"
 #include "../Interface/TextButton.h"
 #include "../Engine/Game.h"
+#include "../Engine/Options.h"
 #include "../Savegame/SavedGame.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
 #include "../Interface/Text.h"
 #include "OptionsVideoState.h"
 #include "../Interface/TextEdit.h"
+
+#include <string>
+#include <sstream>
 
 namespace OpenXcom
 {

@@ -17,6 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MedikitView.h"
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Mod/RuleInterface.h"
@@ -25,6 +26,8 @@
 #include "../Engine/Language.h"
 #include "../Savegame/BattleUnit.h"
 #include "../Interface/Text.h"
+
+#include <sstream>
 
 namespace OpenXcom
 {

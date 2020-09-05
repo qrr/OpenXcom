@@ -17,6 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "NextTurnState.h"
+
 #include "../Engine/Game.h"
 #include "../Engine/Options.h"
 #include "../Engine/Timer.h"
@@ -31,6 +32,8 @@
 #include "../Savegame/SavedBattleGame.h"
 #include "BattlescapeState.h"
 #include "Map.h"
+
+#include <sstream>
 
 namespace OpenXcom
 {

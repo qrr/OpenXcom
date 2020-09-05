@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ListLoadOriginalState.h"
-#include <sstream>
 #include "../Savegame/SaveConverter.h"
 #include "../Savegame/SavedGame.h"
 #include "../Savegame/SavedBattleGame.h"
@@ -34,6 +33,8 @@
 #include "../Battlescape/BattlescapeState.h"
 #include "ErrorMessageState.h"
 #include "../Mod/RuleInterface.h"
+
+#include <sstream>
 
 namespace OpenXcom
 {

@@ -17,6 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ResearchInfoState.h"
+
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
@@ -32,6 +33,7 @@
 #include "../Interface/ArrowButton.h"
 #include "../Engine/Timer.h"
 #include "../Engine/RNG.h"
+
 #include <climits>
 
 namespace OpenXcom

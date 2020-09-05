@@ -21,9 +21,9 @@
 
 #include <yaml-cpp/yaml.h>
 
-#include <algorithm>
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 
 namespace OpenXcom
 {

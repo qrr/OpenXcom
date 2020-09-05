@@ -17,8 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SoldierArmorState.h"
-#include <sstream>
-#include <algorithm>
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
@@ -33,6 +32,8 @@
 #include "../Savegame/Base.h"
 #include "../Savegame/ItemContainer.h"
 #include "../Mod/RuleSoldier.h"
+
+#include <sstream>
 
 namespace OpenXcom
 {

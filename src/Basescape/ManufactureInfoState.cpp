@@ -17,7 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "ManufactureInfoState.h"
-#include <algorithm>
+
 #include "../Interface/Window.h"
 #include "../Interface/TextButton.h"
 #include "../Interface/ToggleTextButton.h"
@@ -37,6 +37,8 @@
 #include "../Engine/Timer.h"
 #include "../Menu/ErrorMessageState.h"
 #include "../Mod/RuleInterface.h"
+
+#include <sstream>
 #include <climits>
 
 namespace OpenXcom

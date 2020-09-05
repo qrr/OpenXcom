@@ -17,10 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "NewBattleState.h"
-#include <cmath>
-#include <fstream>
-#include <algorithm>
-#include <yaml-cpp/yaml.h>
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Mod/RuleItem.h"
@@ -52,6 +49,11 @@
 #include "../Engine/CrossPlatform.h"
 #include "../Mod/RuleAlienMission.h"
 #include "../Mod/RuleGlobe.h"
+
+#include <yaml-cpp/yaml.h>
+
+#include <cmath>
+#include <fstream>
 
 namespace OpenXcom
 {

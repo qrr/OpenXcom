@@ -1,3 +1,4 @@
+#pragma once
 /*
  * Copyright 2010-2016 OpenXcom Developers.
  *
@@ -16,21 +17,28 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "LocalizedText.h"
 
-#include "Language.h"
+/*
+* Weird case; the .h should be enough by normal expectations.
+* This was done this way to allow the original .cpp to remain in place
+* as closely to the original as possible.
+*/
+#include "LocalizedText.h"
 
 #include <sstream>
 
 namespace OpenXcom
 {
 
+
 /**
  * Replace the next argument placeholder with @a val.
+ * @tparam T The type of the replacement value. It should be streamable to std::owstringstream.
  * @param val The value to place in the next placeholder's position.
  * @return A translated string with all occurrences of the marker replaced by @a val.
  */
-LocalizedText LocalizedText::arg(const std::string &val) const
+template <typename T>
+LocalizedText LocalizedText::arg(T val) const
 {
 	std::ostringstream os;
 	os << '{' << _nextArg << '}';
@@ -39,19 +47,24 @@ LocalizedText LocalizedText::arg(const std::string &val) const
 	if (std::string::npos == pos)
 		return *this;
 	std::string ntext(_text);
-	for (/*empty*/ ; std::string::npos != pos; pos = ntext.find(marker, pos + val.length()))
+	os.str("");
+	os << val;
+	std::string tval(os.str());
+	for (/*empty*/ ; std::string::npos != pos; pos = ntext.find(marker, pos + tval.length()))
 	{
-		ntext.replace(pos, marker.length(), val);
+		ntext.replace(pos, marker.length(), tval);
 	}
 	return LocalizedText(ntext, _nextArg);
 }
 
 /**
  * Replace the next argument placeholder with @a val.
+ * @tparam T The type of the replacement value. It should be streamable to std::owstringstream.
  * @param val The value to place in the next placeholder's position.
  * @return The translated string with all occurrences of the marker replaced by @a val.
  */
-LocalizedText &LocalizedText::arg(const std::string &val)
+template <typename T>
+LocalizedText &LocalizedText::arg(T val)
 {
 	std::ostringstream os;
 	os << '{' << _nextArg << '}';
@@ -59,47 +72,16 @@ LocalizedText &LocalizedText::arg(const std::string &val)
 	size_t pos = _text.find(marker);
 	if (std::string::npos != pos)
 	{
-		for (/*empty*/ ; std::string::npos != pos; pos = _text.find(marker, pos + val.length()))
+		os.str("");
+		os << val;
+		std::string tval(os.str());
+		for (/*empty*/ ; std::string::npos != pos; pos = _text.find(marker, pos + tval.length()))
 		{
-			_text.replace(pos, marker.length(), val);
+			_text.replace(pos, marker.length(), tval);
 		}
 		++_nextArg;
 	}
 	return *this;
-}
-
-/**
- * Create a LocalizedText from a localized std::string.
- */
-/*inline*/ LocalizedText::LocalizedText(const std::string &text)
-  : _text(text), _nextArg(0)
-{
-	// Empty by design.
-}
-
-/**
- * Create a LocalizedText with some arguments already replaced.
- */
-/*inline*/ LocalizedText::LocalizedText(const std::string &text, unsigned replaced)
-  : _text(text), _nextArg(replaced + 1)
-{
-	// Empty by design.
-}
-
-/**
- * Typecast to constant std::string reference.
- * This is used to avoid copying when the string will not change.
- */
-/*inline*/ LocalizedText::operator std::string const&() const
-{
-	return _text;
-}
-
-/// Allow streaming of LocalizedText objects.
-/*inline*/ std::ostream &operator<<(std::ostream &os, const LocalizedText &txt)
-{
-	os << static_cast<std::string const &>(txt);
-	return os;
 }
 
 }

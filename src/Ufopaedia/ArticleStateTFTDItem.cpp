@@ -17,8 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <sstream>
-#include <algorithm>
 #include "Ufopaedia.h"
 #include "ArticleStateTFTDItem.h"
 #include "../Mod/Mod.h"
@@ -29,6 +27,8 @@
 #include "../Engine/LocalizedText.h"
 #include "../Engine/Unicode.h"
 #include "../Interface/TextList.h"
+
+#include <sstream>
 
 namespace OpenXcom
 {

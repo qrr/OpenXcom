@@ -2,6 +2,9 @@ cmake_minimum_required ( VERSION 3.1 )
 
 project ( OpenXcom )
 
+# Set global property (all targets are impacted)
+#set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time")
+
 set ( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules" )
 include(GNUInstallDirs)
 

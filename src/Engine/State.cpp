@@ -17,7 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "State.h"
-#include <climits>
 #include "InteractiveSurface.h"
 #include "Game.h"
 #include "Screen.h"
@@ -36,6 +35,8 @@
 #include "../Interface/FpsCounter.h"
 #include "../Savegame/SavedBattleGame.h"
 #include "../Mod/RuleInterface.h"
+
+#include <climits>
 
 namespace OpenXcom
 {

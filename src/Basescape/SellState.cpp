@@ -17,11 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "SellState.h"
-#include <algorithm>
-#include <sstream>
-#include <climits>
-#include <cmath>
-#include <iomanip>
+
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
@@ -46,6 +42,10 @@
 #include "../Engine/Options.h"
 #include "../Engine/Unicode.h"
 #include "../Mod/RuleInterface.h"
+
+#include <climits>
+#include <sstream>
+#include <iomanip>
 
 namespace OpenXcom
 {

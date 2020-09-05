@@ -17,10 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "GeoscapeState.h"
-#include <sstream>
-#include <iomanip>
-#include <algorithm>
-#include <functional>
 #include "../Engine/RNG.h"
 #include "../Engine/Game.h"
 #include "../Engine/Action.h"
@@ -105,6 +101,8 @@
 #include "../Mod/AlienDeployment.h"
 #include "../Mod/RuleInterface.h"
 #include "../fmath.h"
+
+#include <iomanip>
 
 namespace OpenXcom
 {

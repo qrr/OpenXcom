@@ -20,6 +20,7 @@
 #include <SDL_video.h> //For SDL_GrabMode, transitively provided to Options.inc.h.
 #include "OptionInfo.h"
 #include "ModInfo.h"
+#include "MusicFormat.h"
 
 #include <string>
 #include <vector>
@@ -33,8 +34,7 @@ enum ScrollType { SCROLL_NONE, SCROLL_TRIGGER, SCROLL_AUTO };
 enum KeyboardType { KEYBOARD_OFF, KEYBOARD_ON, KEYBOARD_VIRTUAL };
 /// Savegame sorting modes.
 enum SaveSort { SORT_NAME_ASC, SORT_NAME_DESC, SORT_DATE_ASC, SORT_DATE_DESC };
-/// Music format preferences.
-enum MusicFormat { MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
+
 /// Sound format preferences.
 enum SoundFormat { SOUND_AUTO, SOUND_14, SOUND_10 };
 /// Video format preferences.

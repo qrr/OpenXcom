@@ -18,9 +18,11 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Music.h"
+
+#include <SDL_mixer.h>
+
 #include <map>
 #include <string>
-#include <SDL_mixer.h>
 
 namespace OpenXcom
 {

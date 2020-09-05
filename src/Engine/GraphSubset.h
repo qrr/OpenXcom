@@ -119,4 +119,3 @@ struct GraphSubset
 }//namespace OpenXcom
 
 #endif	/* OPENXCOM_GRAPHSUBSET_H */
-

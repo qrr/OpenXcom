@@ -28,6 +28,8 @@
 #include "../Engine/Unicode.h"
 #include "../Interface/Text.h"
 
+#include <sstream>
+
 namespace OpenXcom
 {
 

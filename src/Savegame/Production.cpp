@@ -30,7 +30,6 @@
 #include <yaml-cpp/yaml.h>
 
 #include <climits>
-#include <algorithm>
 
 namespace OpenXcom
 {

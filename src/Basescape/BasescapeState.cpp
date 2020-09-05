@@ -51,6 +51,8 @@
 #include "../Geoscape/AllocatePsiTrainingState.h"
 #include "../Mod/RuleInterface.h"
 
+#include <sstream>
+
 namespace OpenXcom
 {
 

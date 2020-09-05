@@ -17,14 +17,14 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <map>
-#include <vector>
-#include <utility>
-#include <string>
 
 #include <SDL_video.h> //For SDL_Color, SDL_Rect.
 
 #include "Unicode.h"
+
+#include <map>
+#include <vector>
+
 /*
 * Instead of pulling in yaml-cpp, just pre-declare the require Node
 * we require in member function definitions.

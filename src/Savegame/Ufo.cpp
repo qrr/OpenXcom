@@ -17,8 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "Ufo.h"
-#include <assert.h>
-#include <algorithm>
+
 #include "../fmath.h"
 #include "Craft.h"
 #include "AlienMission.h"
@@ -30,6 +29,9 @@
 #include "../Mod/RuleAlienMission.h"
 #include "SavedGame.h"
 #include "Waypoint.h"
+
+#include <assert.h>
+#include <algorithm>
 
 namespace OpenXcom
 {

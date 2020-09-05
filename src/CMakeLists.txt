@@ -124,6 +124,8 @@ set ( engine_src
   Engine/Palette.cpp
   Engine/RNG.cpp
   Engine/RNG-ETI.cpp
+  Engine/LocalizedText-ETI.cpp
+  Engine/LocalizedText.cpp
   Engine/Scalers/hq2x.cpp
   Engine/Scalers/hq3x.cpp
   Engine/Scalers/hq4x.cpp
@@ -415,7 +417,7 @@ if ( MSVC )
     add_definitions ( /WX )
   endif ( FATAL_WARNING )
   set ( CMAKE_EXE_LINKER_FLAGS "/manifest:no" )
-  set ( CMAKE_MODULE_LINKER_FLAGS "/manifest:no" ) 
+  set ( CMAKE_MODULE_LINKER_FLAGS "/manifest:no" )
   set ( CMAKE_SHARED_LINKER_FLAGS="/manifest:no" )
 endif ()
 

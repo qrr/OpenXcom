@@ -16,13 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <sstream>
 #include "version.h"
 #include "Engine/Logger.h"
 #include "Engine/CrossPlatform.h"
 #include "Engine/Game.h"
 #include "Engine/Options.h"
 #include "Menu/StartState.h"
+
+#include <sstream>
 
 /** @mainpage
  * @author OpenXcom Developers

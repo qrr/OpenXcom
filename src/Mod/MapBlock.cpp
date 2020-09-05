@@ -17,6 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "MapBlock.h"
+
 #include "../Battlescape/Position.h"
 #include "../Engine/Exception.h"
 

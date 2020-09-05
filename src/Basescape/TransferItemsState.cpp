@@ -17,9 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "TransferItemsState.h"
-#include <algorithm>
-#include <sstream>
-#include <climits>
+
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
@@ -44,6 +42,9 @@
 #include "../Mod/RuleCraftWeapon.h"
 #include "../Mod/Armor.h"
 #include "../Interface/ComboBox.h"
+
+#include <sstream>
+#include <climits>
 
 namespace OpenXcom
 {

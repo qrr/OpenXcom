@@ -18,6 +18,7 @@
  */
 
 #include "../Mod/ArticleDefinition.h"
+
 #include "ArticleStateTFTD.h"
 #include "../Engine/Game.h"
 #include "../Engine/Palette.h"
@@ -26,6 +27,8 @@
 #include "../Mod/Mod.h"
 #include "../Interface/Text.h"
 #include "../Interface/TextButton.h"
+
+#include <sstream>
 
 namespace OpenXcom
 {

@@ -17,10 +17,10 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "../Engine/Options.h"
+#include "../Engine/MusicFormat.h"
 #include "../Savegame/GameTime.h"
-#include "Unit.h"
 #include "RuleAlienMission.h"
+#include "Unit.h"
 
 #include <SDL_video.h> //For SDL_Color.
 

@@ -17,8 +17,6 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "DogfightState.h"
-#include <cmath>
-#include <sstream>
 #include "GeoscapeState.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
@@ -48,6 +46,9 @@
 #include "../Savegame/AlienMission.h"
 #include "DogfightErrorState.h"
 #include "../Mod/RuleInterface.h"
+
+#include <cmath>
+#include <sstream>
 
 namespace OpenXcom
 {

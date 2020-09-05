@@ -17,37 +17,11 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL_types.h>
 
 namespace OpenXcom
 {
 
-class Particle
-{
-private:
-	float _xOffset, _yOffset, _density;
-	Uint8 _color, _opacity, _size;
-public:
-	/// Create a particle.
-	Particle(float xOffset, float yOffset, float density, Uint8 color, Uint8 opacity);
-	/// Destroy a particle.
-	~Particle();
-	/// Animate a particle.
-	bool animate();
-	/// Get the size value.
-	int getSize() const { return _size; }
-	/// Get the color.
-	Uint8 getColor() const { return _color; }
-	/// Get the opacity.
-	Uint8 getOpacity() const {
-		const unsigned int computedOpacity = (_opacity + 7) / 10;
-		return computedOpacity < 3 ? computedOpacity : 3;
-	}
-
-	/// Get the horizontal shift.
-	float getX() const { return _xOffset; }
-	/// Get the vertical shift.
-	float getY() const { return _yOffset; }
-};
+/// Music format preferences.
+enum MusicFormat { MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
 
 }

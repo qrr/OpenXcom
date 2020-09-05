@@ -18,10 +18,8 @@
  */
 #include "SoldierDiaryPerformanceState.h"
 #include "SoldierDiaryOverviewState.h"
-#include <sstream>
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
-#include "../Engine/LocalizedText.h"
 #include "../Engine/Options.h"
 #include "../Engine/SurfaceSet.h"
 #include "../Interface/TextButton.h"
@@ -33,6 +31,8 @@
 #include "../Savegame/SoldierDiary.h"
 #include "../Mod/RuleCommendations.h"
 #include "../Engine/Action.h"
+
+#include <sstream>
 
 namespace OpenXcom
 {

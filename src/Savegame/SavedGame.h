@@ -17,14 +17,16 @@
  * You should have received a copy of the GNU General Public License
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <map>
-#include <vector>
-#include <string>
-#include <time.h>
-#include <stdint.h>
 #include "GameTime.h"
 #include "../Mod/RuleAlienMission.h"
 #include "../Savegame/Craft.h"
+
+#include <time.h>
+#include <stdint.h>
+
+#include <map>
+#include <vector>
+#include <string>
 
 namespace OpenXcom
 {

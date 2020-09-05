@@ -17,8 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "CraftSoldiersState.h"
-#include <algorithm>
-#include <climits>
+
 #include "../Engine/Action.h"
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
@@ -35,6 +34,8 @@
 #include "../Savegame/SavedGame.h"
 #include "SoldierInfoState.h"
 #include "../Mod/RuleInterface.h"
+
+#include <climits>
 
 namespace OpenXcom
 {

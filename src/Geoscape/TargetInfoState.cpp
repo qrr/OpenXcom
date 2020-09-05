@@ -17,6 +17,7 @@
  * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "TargetInfoState.h"
+
 #include "../Engine/Game.h"
 #include "../Mod/Mod.h"
 #include "../Engine/LocalizedText.h"
@@ -28,6 +29,8 @@
 #include "../Engine/Options.h"
 #include "InterceptState.h"
 #include "../Engine/Action.h"
+
+#include <sstream>
 
 namespace OpenXcom
 {
