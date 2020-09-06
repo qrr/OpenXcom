@@ -61,14 +61,10 @@ Particle::~Particle()
  */
 bool Particle::animate()
 {
-	_yOffset -= ((320-_density)/256.0);
+	_yOffset -= ((320-_density)/256.0f);
 	_opacity--;
-	_xOffset += (RNG::seedless(0,1)*2 -1)* (0.25 + (float)RNG::seedless(0,9)/30);
-	if ( _opacity == 0 )
-	{
-		return false;
-	}
-	return true;
+	_xOffset += (RNG::seedless(0,1)*2 -1)* (0.25f + (float)RNG::seedless(0,9)/30);
+	return (_opacity != 0);
 }
 
 }

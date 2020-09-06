@@ -58,8 +58,9 @@ class SavedBattleGame
 private:
 	BattlescapeState *_battleState;
 	int _mapsize_x, _mapsize_y, _mapsize_z;
+	int _mapsize_xy, _mapsize_xyz;
 	std::vector<MapDataSet*> _mapDataSets;
-	Tile **_tiles;
+	Tile** _tiles;
 	BattleUnit *_selectedUnit, *_lastSelectedUnit;
 	std::vector<Node*> _nodes;
 	std::vector<BattleUnit*> _units;
@@ -136,13 +137,15 @@ public:
 	 * @param pos The position to convert.
 	 * @return A unique index.
 	 */
-	inline int getTileIndex(Position pos) const
+
+	inline int getTileIndex(const Position pos) const
 	{
-		return pos.z * _mapsize_y * _mapsize_x + pos.y * _mapsize_x + pos.x;
+      		const auto newPos =   pos.z * _mapsize_xy + pos.y * _mapsize_x + pos.x;
+		return newPos;
 	}
 
 	/// Converts a tile index to its coordinates.
-	void getTileCoords(int index, int *x, int *y, int *z) const;
+	void getTileCoords(const int index, int *const x, int * const y, int * const z) const;
 
 	/**
 	 * Gets the Tile at a given position on the map.
@@ -151,11 +154,11 @@ public:
 	 * @param pos Map position.
 	 * @return Pointer to the tile at that position.
 	 */
-	inline Tile *getTile(Position pos) const
+	inline Tile* getTile(const Position pos) const
 	{
 		if (pos.x < 0 || pos.y < 0 || pos.z < 0
 			|| pos.x >= _mapsize_x || pos.y >= _mapsize_y || pos.z >= _mapsize_z)
-			return 0;
+			return nullptr;
 
 		return _tiles[getTileIndex(pos)];
 	}

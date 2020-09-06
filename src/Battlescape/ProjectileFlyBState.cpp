@@ -437,10 +437,10 @@ void ProjectileFlyBState::think()
 	/* TODO refactoring : store the projectile in this state, instead of getting it from the map each time? */
 	if (_parent->getMap()->getProjectile() == 0)
 	{
-		Tile *t = _parent->getSave()->getTile(_action.actor->getPosition());
-		Tile *bt = _parent->getSave()->getTile(_action.actor->getPosition() + Position(0,0,-1));
-		bool hasFloor = t && !t->hasNoFloor(bt);
-		bool unitCanFly = _action.actor->getMovementType() == MT_FLY;
+		const Tile* const t = _parent->getSave()->getTile(_action.actor->getPosition());
+		const Tile* const bt = _parent->getSave()->getTile(_action.actor->getPosition() + Position(0,0,-1));
+		const bool hasFloor = t && !t->hasNoFloor(bt);
+		const bool unitCanFly = _action.actor->getMovementType() == MT_FLY;
 
 		if (_action.type == BA_AUTOSHOT
 			&& _action.autoShotCounter < _action.weapon->getRules()->getAutoShots()
@@ -565,7 +565,7 @@ void ProjectileFlyBState::think()
 						projectileHitUnit(_parent->getMap()->getProjectile()->getPosition(offset));
 					}
 
-					int firingXP = _unit->getFiringXP();
+					const int firingXP = _unit->getFiringXP();
 					// special shotgun behaviour: trace extra projectile paths, and add bullet hits at their termination points.
 					if (_ammo && _ammo->getRules()->getShotgunPellets()  != 0)
 					{
@@ -645,7 +645,7 @@ void ProjectileFlyBState::cancel()
  * @param target Tile to throw to.
  * @return True when the range is valid.
  */
-bool ProjectileFlyBState::validThrowRange(BattleAction *action, Position origin, Tile *target)
+bool ProjectileFlyBState::validThrowRange(const BattleAction *const action,const Position origin,const Tile *const target)
 {
 	// note that all coordinates and thus also distances below are in number of tiles (not in voxels).
 	if (action->type != BA_THROW)

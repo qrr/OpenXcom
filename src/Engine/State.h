@@ -20,6 +20,10 @@
 #include <vector>
 #include <string>
 
+/**
+** [NOTE] Eliminating/reducing the scope this include has no benefit
+** whatsoever.
+**/
 #include <SDL_video.h>  // For SDL_color.
 
 namespace OpenXcom
@@ -46,7 +50,7 @@ class State
 	friend class Timer;
 
 protected:
-	static Game *_game;
+	static Game* _game;
 	std::vector<Surface*> _surfaces;
 	bool _screen;
 	InteractiveSurface *_modal;

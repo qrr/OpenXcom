@@ -388,8 +388,7 @@ YAML::Node BattleUnit::save() const
 	node["genUnitArmor"] = _armor->getType();
 	node["faction"] = (int)_faction;
 	node["status"] = (int)_status;
-	// HAX DO NOT COMMIT
-	//node["position"] = _pos;
+	node["position"] = _pos;
 	node["direction"] = _direction;
 	node["directionTurret"] = _directionTurret;
 	node["tu"] = _tu;

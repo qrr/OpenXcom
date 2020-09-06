@@ -38,7 +38,7 @@ private:
 	BattleUnit *_unit;
 	Position _center;
 	BattleItem *_item;
-	Tile *_tile;
+	Tile* const _tile;
 	int _power;
 	bool _areaOfEffect, _lowerWeapon, _cosmetic;
 	/// Calculates the effects of the explosion.

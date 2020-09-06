@@ -263,7 +263,7 @@ void Map::drawTerrain(Surface *surface)
 	bool invalid;
 	int tileShade, wallShade, tileColor;
 	static const int arrowBob[8] = {0,1,2,1,0,1,2,1};
-	
+
 	NumberText *_numWaypid = 0;
 
 	// if we got bullet, get the highest x and y tiles to draw it on
@@ -456,8 +456,8 @@ void Map::drawTerrain(Surface *surface)
 					// special handling for a moving unit.
 					if (mapPosition.y > 0)
 					{
-						Tile *tileNorth = _save->getTile(mapPosition - Position(0,1,0));
-						BattleUnit *bu = tileNorth->getUnit();
+						const Tile* tileNorth = _save->getTile(mapPosition - Position(0,1,0));
+						BattleUnit* bu = tileNorth->getUnit();
 						int tileNorthShade, tileTwoNorthShade, tileWestShade, tileNorthWestShade, tileSouthWestShade;
 						if (tileNorth->isDiscovered(2))
 						{
@@ -466,7 +466,7 @@ void Map::drawTerrain(Surface *surface)
 						else
 						{
 							tileNorthShade = 16;
-							bu = 0;
+							bu = nullptr;
 						}
 
 						/*
@@ -474,7 +474,7 @@ void Map::drawTerrain(Surface *surface)
 						 */
 						if (bu && bu->getVisible() && bu->getStatus() == STATUS_WALKING && tile->getTerrainLevel() >= tileNorth->getTerrainLevel())
 						{
-							Position tileOffset = Position(16,-8,0);
+							const Position tileOffset = Position(16,-8,0);
 							// the part is 0 for small units, large units have parts 1,2 & 3 depending on the relative x/y position of this tile vs the actual unit position.
 							int part = 0;
 							part += tileNorth->getPosition().x - bu->getPosition().x;
@@ -575,7 +575,7 @@ void Map::drawTerrain(Surface *surface)
 								/*
 								 * Phase VI: we need to re-render everything in the tile to the west.
 								 */
-								Tile *tileWest = _save->getTile(mapPosition - Position(1,0,0));
+								const Tile* const tileWest = _save->getTile(mapPosition - Position(1,0,0));
 								BattleUnit *westUnit = tileWest->getUnit();
 								if (tileWest->isDiscovered(2))
 								{

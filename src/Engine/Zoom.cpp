@@ -721,7 +721,9 @@ int Zoom::_zoomSurfaceY(SDL_Surface * src, SDL_Surface * dst, int flipx, int fli
 	int csx, csy;
 	Uint8 *sp, *dp, *csp;
 	int dgap;
+	#ifndef NDEBUG
 	static bool proclaimed = false;
+	#endif
 
 	if (Screen::use32bitScaler())
 	{
@@ -831,11 +833,13 @@ int Zoom::_zoomSurfaceY(SDL_Surface * src, SDL_Surface * dst, int flipx, int fli
 		else if (dst->w == src->w * 2) return zoomSurface2X_XAxis_32bit(src, dst);
 	}
 	*/
+	#ifndef NDEBUG
 	if (!proclaimed)
 	{
 		Log(LOG_INFO) << "Using software scaling routine. For best results, try an OpenGL filter.";
 		proclaimed = true;
 	}
+	#endif
 	
 	/*
 	* Allocate memory for row increments

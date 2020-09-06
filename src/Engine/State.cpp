@@ -43,7 +43,7 @@ namespace OpenXcom
 {
 
 /// Initializes static member
-Game* State::_game = 0;
+Game* State::_game = nullptr;
 
 /**
  * Initializes a brand new state with no child elements.

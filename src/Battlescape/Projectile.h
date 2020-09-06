@@ -37,9 +37,9 @@ class Mod;
 class Projectile
 {
 private:
-	Mod *_mod;
-	SavedBattleGame *_save;
-	BattleAction _action;
+	Mod* const  _mod;
+	SavedBattleGame* const  _save;
+	const BattleAction _action;
 	Position _origin, _targetVoxel;
 	std::vector<Position> _trajectory;
 	size_t _position;

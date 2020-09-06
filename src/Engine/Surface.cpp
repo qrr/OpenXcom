@@ -922,7 +922,7 @@ struct StandardShade
  * @param half some tiles are blitted only the right half
  * @param newBaseColor Attention: the actual color + 1, because 0 is no new base color.
  */
-void Surface::blitNShade(Surface *surface, int x, int y, int off, bool half, int newBaseColor)
+void Surface::blitNShade(Surface *surface,const int x,const int y,const int off,const bool half,int newBaseColor)
 {
 	ShaderMove<Uint8> src(this, x, y);
 	if (half)
@@ -938,8 +938,9 @@ void Surface::blitNShade(Surface *surface, int x, int y, int off, bool half, int
 		ShaderDraw<ColorReplace>(ShaderSurface(surface), src, ShaderScalar(off), ShaderScalar(newBaseColor));
 	}
 	else
+	{
 		ShaderDraw<StandardShade>(ShaderSurface(surface), src, ShaderScalar(off));
-
+	}
 }
 
 /**

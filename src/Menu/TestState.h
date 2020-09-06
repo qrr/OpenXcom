@@ -19,6 +19,8 @@
  */
 #include "../Engine/State.h"
 
+#include <SDL_video.h>
+
 namespace OpenXcom
 {
 

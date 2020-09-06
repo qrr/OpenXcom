@@ -1791,7 +1791,7 @@ Pathfinding *BattlescapeGame::getPathfinding()
  * Gets the mod.
  * @return mod.
  */
-Mod *BattlescapeGame::getMod()
+Mod *BattlescapeGame::getMod() const
 {
 	return _parentState->getGame()->getMod();
 }

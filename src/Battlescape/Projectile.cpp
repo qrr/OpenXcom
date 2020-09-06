@@ -111,16 +111,16 @@ Projectile::~Projectile()
  * @return The objectnumber(0-3) or unit(4) or out of map (5) or -1 (no line of fire).
  */
 
-int Projectile::calculateTrajectory(double accuracy)
+int Projectile::calculateTrajectory(const double accuracy)
 {
-	Position originVoxel = _save->getTileEngine()->getOriginVoxel(_action, _save->getTile(_origin));
+	const Position originVoxel = _save->getTileEngine()->getOriginVoxel(_action, _save->getTile(_origin));
 	return calculateTrajectory(accuracy, originVoxel);
 }
 
-int Projectile::calculateTrajectory(double accuracy, const Position& originVoxel, bool excludeUnit)
+int Projectile::calculateTrajectory(double accuracy, const Position& originVoxel,const bool excludeUnit)
 {
-	Tile *targetTile = _save->getTile(_action.target);
-	BattleUnit *bu = _action.actor;
+	const Tile* const targetTile = _save->getTile(_action.target);
+	const BattleUnit* const bu = _action.actor;
 	
 	int test;
 	if (excludeUnit)
@@ -129,7 +129,7 @@ int Projectile::calculateTrajectory(double accuracy, const Position& originVoxel
 	}
 	else
 	{
-		test = _save->getTileEngine()->calculateLine(originVoxel, _targetVoxel, false, &_trajectory, 0);
+		test = _save->getTileEngine()->calculateLine(originVoxel, _targetVoxel, false, &_trajectory, nullptr);
 	}
 
 	if (test != V_EMPTY &&
@@ -166,8 +166,8 @@ int Projectile::calculateTrajectory(double accuracy, const Position& originVoxel
 			}
 			else if (test == V_UNIT)
 			{
-				BattleUnit *hitUnit = _save->getTile(hitPos)->getUnit();
-				BattleUnit *targetUnit = targetTile->getUnit();
+				const BattleUnit* const hitUnit = _save->getTile(hitPos)->getUnit();
+				const BattleUnit* const targetUnit = targetTile->getUnit();
 				if (hitUnit != targetUnit)
 				{
 					_trajectory.clear();
@@ -367,9 +367,9 @@ void Projectile::applyAccuracy(Position origin, Position *target, double accurac
 		accuracy = std::max(0.0, accuracy - modifier);
 	}
 
-	int xDist = abs(origin.x - target->x);
-	int yDist = abs(origin.y - target->y);
-	int zDist = abs(origin.z - target->z);
+	const int xDist = abs(origin.x - target->x);
+	const int yDist = abs(origin.y - target->y);
+	const int zDist = abs(origin.z - target->z);
 	int xyShift, zShift;
 
 	if (xDist / 2 <= yDist)				//yes, we need to add some x/y non-uniformity
@@ -440,9 +440,9 @@ bool Projectile::move()
  * @param offset Offset.
  * @return Position in voxel space.
  */
-Position Projectile::getPosition(int offset) const
+Position Projectile::getPosition(const int offset) const
 {
-	int posOffset = (int)_position + offset;
+	const int posOffset = (int)_position + offset;
 	if (posOffset >= 0 && posOffset < (int)_trajectory.size())
 		return _trajectory.at(posOffset);
 	else

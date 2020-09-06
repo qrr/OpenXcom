@@ -269,7 +269,7 @@ int Tile::getTUCost(int part, MovementType movementType) const
  * @param tileBelow
  * @return bool
  */
-bool Tile::hasNoFloor(Tile *tileBelow) const
+bool Tile::hasNoFloor(const Tile *const tileBelow) const
 {
 	if (tileBelow != 0 && tileBelow->getTerrainLevel() == -24)
 		return false;
@@ -385,7 +385,7 @@ int Tile::closeUfoDoor()
  * @param flag true/false
  * @param part 0-2 westwall/northwall/content+floor
  */
-void Tile::setDiscovered(bool flag, int part)
+void Tile::setDiscovered(const bool flag,const int part)
 {
 	if (_discovered[part] != flag)
 	{
@@ -408,7 +408,7 @@ void Tile::setDiscovered(bool flag, int part)
  * @param part 0-2 westwall/northwall/content+floor
  * @return bool True = discovered the tile.
  */
-bool Tile::isDiscovered(int part) const
+bool Tile::isDiscovered(const int part) const
 {
 	return _discovered[part];
 }
@@ -550,8 +550,16 @@ int Tile::getFlammability() const
 	int flam = 255;
 
 	for (int i=0; i<4; ++i)
-		if (_objects[i] && (_objects[i]->getFlammable() < flam))
-			flam = _objects[i]->getFlammable();
+	{
+		if (_objects[i])
+		{
+			const auto flammability = _objects[i]->getFlammable();
+			if (flammability < flam)
+			{
+				flam = flammability;
+			}
+		}
+	}
 
 	return flam;
 }
@@ -788,16 +796,16 @@ void Tile::removeItem(BattleItem *item)
  * Get the topmost item sprite to draw on the battlescape.
  * @return item sprite ID in floorob, or -1 when no item
  */
-int Tile::getTopItemSprite()
+int Tile::getTopItemSprite() const
 {
 	int biggestWeight = -1;
 	int biggestItem = -1;
-	for (std::vector<BattleItem*>::iterator i = _inventory.begin(); i != _inventory.end(); ++i)
+	for(auto i : _inventory)
 	{
-		if ((*i)->getRules()->getWeight() > biggestWeight)
+		if (i->getRules()->getWeight() > biggestWeight)
 		{
-			biggestWeight = (*i)->getRules()->getWeight();
-			biggestItem = (*i)->getRules()->getFloorSprite();
+			biggestWeight = i->getRules()->getWeight();
+			biggestItem = i->getRules()->getFloorSprite();
 		}
 	}
 	return biggestItem;

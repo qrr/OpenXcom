@@ -48,7 +48,7 @@ namespace OpenXcom
 /**
  * Initializes a brand new battlescape saved game.
  */
-SavedBattleGame::SavedBattleGame() : _battleState(0), _mapsize_x(0), _mapsize_y(0), _mapsize_z(0), _selectedUnit(0), _lastSelectedUnit(0), _pathfinding(0), _tileEngine(0), _globalShade(0),
+SavedBattleGame::SavedBattleGame() : _battleState(0), _mapsize_x(0), _mapsize_y(0), _mapsize_z(0), _mapsize_xy(0), _mapsize_xyz(0),_selectedUnit(0), _lastSelectedUnit(0), _pathfinding(0), _tileEngine(0), _globalShade(0),
 	_side(FACTION_PLAYER), _turn(1), _debugMode(false), _aborted(false), _itemId(0), _objectiveType(-1), _objectivesDestroyed(0), _objectivesNeeded(0), _unitsFalling(false), _cheating(false),
 	_tuReserved(BA_NONE), _kneelReserved(false), _depth(0), _ambience(-1), _ambientVolume(0.5), _turnLimit(0), _cheatTurn(20), _chronoTrigger(FORCE_LOSE), _beforeGame(true)
 {
@@ -118,9 +118,9 @@ SavedBattleGame::~SavedBattleGame()
  */
 void SavedBattleGame::load(const YAML::Node &node, Mod *mod, SavedGame* savedGame)
 {
-	int mapsize_x = node["width"].as<int>(_mapsize_x);
-	int mapsize_y = node["length"].as<int>(_mapsize_y);
-	int mapsize_z = node["height"].as<int>(_mapsize_z);
+	const int mapsize_x = node["width"].as<int>(_mapsize_x);
+	const int mapsize_y = node["length"].as<int>(_mapsize_y);
+	const int mapsize_z = node["height"].as<int>(_mapsize_z);
 	initMap(mapsize_x, mapsize_y, mapsize_z);
 
 	_missionType = node["missionType"].as<std::string>(_missionType);
@@ -169,7 +169,7 @@ void SavedBattleGame::load(const YAML::Node &node, Mod *mod, SavedGame* savedGam
 		while (r < dataEnd)
 		{
 			int index = unserializeInt(&r, serKey.index);
-			assert (index >= 0 && index < _mapsize_x * _mapsize_z * _mapsize_y);
+			assert (index >= 0 && index < _mapsize_xyz);
 			_tiles[index]->loadBinary(r, serKey); // loadBinary's privileges to advance *r have been revoked
 			r += serKey.totalBytes-serKey.index; // r is now incremented strictly by totalBytes in case there are obsolete fields present in the data
 		}
@@ -518,6 +518,8 @@ void SavedBattleGame::initMap(int mapsize_x, int mapsize_y, int mapsize_z, bool 
 	_mapsize_x = mapsize_x;
 	_mapsize_y = mapsize_y;
 	_mapsize_z = mapsize_z;
+	_mapsize_xy = mapsize_x * mapsize_y;
+	_mapsize_xyz = mapsize_x * mapsize_y * mapsize_z;
 	_tiles = new Tile*[_mapsize_z * _mapsize_y * _mapsize_x];
 	for (int i = 0; i < _mapsize_z * _mapsize_y * _mapsize_x; ++i)
 	{
@@ -609,7 +611,7 @@ int SavedBattleGame::getMapSizeZ() const
  */
 int SavedBattleGame::getMapSizeXYZ() const
 {
-	return _mapsize_x * _mapsize_y * _mapsize_z;
+	return _mapsize_xyz;
 }
 
 /**
@@ -619,11 +621,11 @@ int SavedBattleGame::getMapSizeXYZ() const
  * @param y Pointer to the Y coordinate.
  * @param z Pointer to the Z coordinate.
  */
-void SavedBattleGame::getTileCoords(int index, int *x, int *y, int *z) const
+void SavedBattleGame::getTileCoords(const int index,int * const x, int * const y, int * const z) const
 {
-	*z = index / (_mapsize_y * _mapsize_x);
-	*y = (index % (_mapsize_y * _mapsize_x)) / _mapsize_x;
-	*x = (index % (_mapsize_y * _mapsize_x)) % _mapsize_x;
+	*z = index / (_mapsize_xy);
+	*y = (index % (_mapsize_xy)) / _mapsize_x;
+	*x = (index % (_mapsize_xy)) % _mapsize_x;
 }
 
 /**
@@ -1292,7 +1294,7 @@ void SavedBattleGame::prepareNewTurn()
 	std::vector<Tile*> tilesOnSmoke;
 
 	// prepare a list of tiles on fire
-	for (int i = 0; i < _mapsize_x * _mapsize_y * _mapsize_z; ++i)
+	for (int i = 0; i < _mapsize_xyz; ++i)
 	{
 		if (getTiles()[i]->getFire() > 0)
 		{
@@ -1361,7 +1363,7 @@ void SavedBattleGame::prepareNewTurn()
 	}
 
 	// prepare a list of tiles on fire/with smoke in them (smoke acts as fire intensity)
-	for (int i = 0; i < _mapsize_x * _mapsize_y * _mapsize_z; ++i)
+	for (int i = 0; i < _mapsize_xyz; ++i)
 	{
 		if (getTiles()[i]->getSmoke() > 0)
 		{
@@ -1425,7 +1427,7 @@ void SavedBattleGame::prepareNewTurn()
 	if (!tilesOnFire.empty() || !tilesOnSmoke.empty())
 	{
 		// do damage to units, average out the smoke, etc.
-		for (int i = 0; i < _mapsize_x * _mapsize_y * _mapsize_z; ++i)
+		for (int i = 0; i < _mapsize_xyz; ++i)
 		{
 			if (getTiles()[i]->getSmoke() != 0)
 				getTiles()[i]->prepareNewTurn(getDepth() == 0);
@@ -1642,7 +1644,7 @@ bool SavedBattleGame::getUnitsFalling() const
 BattleUnit* SavedBattleGame::getHighestRankedXCom()
 {
 	BattleUnit* highest = 0;
-	for (std::vector<BattleUnit*>::iterator j = _units.begin(); j != _units.end(); ++j)
+	for (auto j = _units.cbegin(); j != _units.cend(); ++j)
 	{
 		if ((*j)->getOriginalFaction() == FACTION_PLAYER && !(*j)->isOut())
 		{

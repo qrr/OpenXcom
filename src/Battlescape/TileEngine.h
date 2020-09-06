@@ -47,7 +47,7 @@ private:
 	std::vector<Uint16> *_voxelData;
 	static const int heightFromCenter[11];
 	void addLight(Position center, int power, int layer);
-	int blockage(Tile *tile, const int part, ItemDamageType type, int direction = -1, bool checkingFromOrigin = false);
+	int blockage(const Tile* const tile, const int part,const ItemDamageType type,const int direction = -1,const bool checkingFromOrigin = false);
 	bool _personalLighting;
 	Tile *_cacheTile;
 	Tile *_cacheTileBelow;
@@ -62,7 +62,7 @@ public:
 	/// Calculates sun shading of a single tile.
 	void calculateSunShading(Tile *tile);
 	/// Calculates the field of view from a units view point.
-	bool calculateFOV(BattleUnit *unit);
+	bool calculateFOV(BattleUnit* const unit);
 	/// Calculates the field of view within range of a certain position.
 	void calculateFOV(Position position);
 	/// Checks reaction fire.
@@ -82,7 +82,16 @@ public:
 	/// Closes ufo doors.
 	int closeUfoDoors();
 	/// Calculates a line trajectory.
-	int calculateLine(Position origin, Position target, bool storeTrajectory, std::vector<Position> *trajectory, BattleUnit *excludeUnit, bool doVoxelCheck = true, bool onlyVisible = false, BattleUnit *excludeAllBut = 0);
+	int calculateLine(
+		const Position origin,
+		const Position target,
+		const bool storeTrajectory,
+		std::vector<Position>* const trajectory,
+		const BattleUnit* excludeUnit,
+		const bool doVoxelCheck = true,
+		const bool onlyVisible = false,
+		const BattleUnit* excludeAllBut = 0
+	);
 	/// Calculates a parabola trajectory.
 	int calculateParabola(Position origin, Position target, bool storeTrajectory, std::vector<Position> *trajectory, BattleUnit *excludeUnit, double curvature, const Position delta);
 	/// Gets the origin voxel of a unit's eyesight.
@@ -96,9 +105,9 @@ public:
 	/// Checks the distance squared between two positions.
 	int distanceSq(Position pos1, Position pos2, bool considerZ = true) const;
 	/// Checks the horizontal blockage of a tile.
-	int horizontalBlockage(Tile *startTile, Tile *endTile, ItemDamageType type, bool skipObject = false);
+	int horizontalBlockage(Tile *startTile, Tile *endTile, ItemDamageType type,const bool skipObject = false);
 	/// Checks the vertical blockage of a tile.
-	int verticalBlockage(Tile *startTile, Tile *endTile, ItemDamageType type, bool skipObject = false);
+	int verticalBlockage(Tile *startTile, Tile *endTile, ItemDamageType type,const bool skipObject = false);
 	/// Applies gravity to anything that occupy this tile.
 	Tile *applyGravity(Tile *t);
 	/// Returns melee validity between two units.
@@ -118,13 +127,19 @@ public:
 	/// Checks the visibility of a given voxel.
 	bool isVoxelVisible(Position voxel);
 	/// Checks what type of voxel occupies this space.
-	int voxelCheck(Position voxel, BattleUnit *excludeUnit, bool excludeAllUnits = false, bool onlyVisible = false, BattleUnit *excludeAllBut = 0);
+	int voxelCheck(
+		const Position voxel,
+		const BattleUnit* const excludeUnit,
+		const bool excludeAllUnits = false,
+		const bool onlyVisible = false,
+		const BattleUnit* const excludeAllBut = 0
+	);
 	/// Flushes cache of voxel check
 	void voxelCheckFlush();
 	/// Blows this tile up.
 	bool detonate(Tile* tile);
 	/// Validates a throwing action.
-	bool validateThrow(BattleAction &action, Position originVoxel, Position targetVoxel, double *curve = 0, int *voxelType = 0, bool forced = false);
+	bool validateThrow(const BattleAction &action,const Position originVoxel,const Position targetVoxel, double *curve = 0, int *voxelType = 0, bool forced = false);
 	/// Opens any doors this door is connected to.
 	void checkAdjacentDoors(const Position& pos, int part);
 	/// Creates a vector of units that can spot this unit.
@@ -140,7 +155,7 @@ public:
 	/// Get direction to a certain point
 	int getDirectionTo(Position origin, Position target) const;
 	/// determine the origin voxel of a given action.
-	Position getOriginVoxel(BattleAction &action, Tile *tile);
+	Position getOriginVoxel(const BattleAction &action, Tile *tile) const;
 	/// mark a region of the map as "dangerous" for a turn.
 	void setDangerZone(const Position& pos, int radius, BattleUnit *unit);
 

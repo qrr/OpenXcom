@@ -54,7 +54,7 @@ public:
 		Uint8 boolFields;
 		Uint32 totalBytes; // per structure, including any data not mentioned here and accounting for all array members!
 	} serializationKey;
-	
+
 	static const int NOT_CALCULATED = -1;
 
 protected:
@@ -113,7 +113,7 @@ public:
 	/// Get the TU cost to walk over a certain part of the tile.
 	int getTUCost(int part, MovementType movementType) const;
 	/// Checks if this tile has a floor.
-	bool hasNoFloor(Tile *tileBelow) const;
+	bool hasNoFloor(const Tile * const tileBelow) const;
 	/// Checks if this tile is a big wall.
 	bool isBigWall() const;
 	/// Get terrain level.
@@ -139,7 +139,7 @@ public:
 	 * @param part
 	 * @return bool
 	 */
-	bool isUfoDoorOpen(int part) const
+	bool isUfoDoorOpen(const int part) const
 	{
 		return (_objects[part] && _objects[part]->isUFODoor() && _currentFrame[part] != 0);
 	}
@@ -207,7 +207,7 @@ public:
 	/// Remove item
 	void removeItem(BattleItem *item);
 	/// Get top-most item
-	int getTopItemSprite();
+	int getTopItemSprite() const;
 	/// New turn preparations.
 	void prepareNewTurn(bool smokeDamage);
 	/// Get inventory on this tile.

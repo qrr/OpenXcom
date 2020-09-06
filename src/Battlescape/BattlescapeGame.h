@@ -70,7 +70,7 @@ class BattlescapeGame
 {
 private:
 	SavedBattleGame *_save;
-	BattlescapeState *_parentState;
+	BattlescapeState* _parentState;
 	std::list<BattleState*> _states, _deleted;
 	bool _playerPanicHandled;
 	int _AIActionCounter;
@@ -160,7 +160,7 @@ public:
 	/// Gets the pathfinding.
 	Pathfinding *getPathfinding();
 	/// Gets the mod.
-	Mod *getMod();
+	Mod* getMod() const;
 	/// Returns whether panic has been handled.
 	bool getPanicHandled() const { return _playerPanicHandled; }
 	/// Tries to find an item and pick it up if possible.

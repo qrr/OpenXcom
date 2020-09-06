@@ -25,20 +25,20 @@ namespace OpenXcom
 {
 namespace helper
 {
-	
+
 /**
  * This is empty argument to `ShaderDraw`.
  * when used in `ShaderDraw` return always 0 to `ColorFunc::func` for every pixel
- */	
+ */
 class Nothing
 {
-	
+
 };
-	
+
 /**
  * This is scalar argument to `ShaderDraw`.
  * when used in `ShaderDraw` return value of `t` to `ColorFunc::func` for every pixel
- */	
+ */
 template<typename T>
 class Scalar
 {
@@ -55,27 +55,27 @@ public:
  * This is surface argument to `ShaderDraw`.
  * every pixel of this surface will have type `Pixel`.
  * Modify pixels of this surface, that will modifying original data.
- */	
+ */
 template<typename Pixel>
 class ShaderBase
 {
 public:
 	typedef Pixel* PixelPtr;
 	typedef Pixel& PixelRef;
-	
+
 protected:
 	const PixelPtr _orgin;
 	const GraphSubset _range_base;
 	GraphSubset _range_domain;
 	const int _pitch;
-	
+
 public:
 	///copy constructor
 	inline ShaderBase(const ShaderBase& s):
 		_orgin(s.ptr()),
 		_range_base(s._range_base),
 		_range_domain(s.getDomain()),
-		_pitch(s.pitch())		
+		_pitch(s.pitch())
 	{
 			
 	}
@@ -85,7 +85,7 @@ public:
 	 * surface will have `max_y` x `max_x` dimensions.
 	 * size of `f` should be bigger than `max_y*max_x`.
 	 * Attention: after use of this constructor you change size of `f` then `_orgin` will be invalid
-	 * and use of this object will cause memory exception. 
+	 * and use of this object will cause memory exception.
      * @param f vector that are treated as surface
      * @param max_x x dimension of `f`
      * @param max_y y dimension of `f`
@@ -94,11 +94,11 @@ public:
 		_orgin(&(f[0])),
 		_range_base(max_x, max_y),
 		_range_domain(max_x, max_y),
-		_pitch(max_x)	
+		_pitch(max_x)
 	{
 		
 	}
-	
+
 	inline PixelPtr ptr() const
 	{
 		return _orgin;
@@ -107,7 +107,7 @@ public:
 	{
 		return _pitch;
 	}
-	
+
 	inline void setDomain(const GraphSubset& g)
 	{
 		_range_domain = GraphSubset::intersection(g, _range_base);
@@ -120,7 +120,7 @@ public:
 	{
 		return _range_base;
 	}
-	
+
 	inline const GraphSubset& getImage() const
 	{
 		return _range_domain;
@@ -436,12 +436,12 @@ struct controler
 	 */
 	inline void set_range(const GraphSubset& g);
 
-	inline void mod_y(int& begin, int& end);
+	inline void mod_y(const int& begin,const int& end);
 	inline void set_y(const int& begin, const int& end);
 	inline void inc_y();
 
 
-	inline void mod_x(int& begin, int& end);
+	inline void mod_x(const int& begin, const int& end);
 	inline void set_x(const int& begin, const int& end);
 	inline void inc_x();
 
@@ -471,7 +471,7 @@ struct controler<Scalar<T> >
 		//nothing
 	}
 	
-	inline void mod_y(int&, int&)
+	inline void mod_y(const int&,const int&)
 	{
 		//nothing
 	}
@@ -485,7 +485,7 @@ struct controler<Scalar<T> >
 	}
 	
 	
-	inline void mod_x(int&, int&)
+	inline void mod_x(const int&,const int&)
 	{
 		//nothing
 	}
@@ -526,7 +526,7 @@ struct controler<Nothing>
 		//nothing
 	}
 	
-	inline void mod_y(int&, int&)
+	inline void mod_y(const int&,const int&)
 	{
 		//nothing
 	}
@@ -539,7 +539,7 @@ struct controler<Nothing>
 		//nothing
 	}
 	
-	inline void mod_x(int&, int&)
+	inline void mod_x(const int&, const int&)
 	{
 		//nothing
 	}
@@ -600,7 +600,7 @@ struct controler_base
 		range = r;
 	}
 	
-	inline void mod_y(int&, int&)
+	inline void mod_y(const int&,const int&)
 	{
 		ptr_pos_y = data + step.first * start_x + step.second * start_y;
 	}
@@ -614,7 +614,7 @@ struct controler_base
 	}
 	
 	
-	inline void mod_x(int&, int&)
+	inline void mod_x(const int&, const int&)
 	{
 		ptr_pos_x = ptr_pos_y;
 	}
